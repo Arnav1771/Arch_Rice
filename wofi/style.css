@@ -1,0 +1,19 @@
+window {
+    background-color: rgba(30, 30, 46, 0.9); /* Dark Purple/Blue */
+    border: 2px solid #ca9ee6;
+    border-radius: 15px;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 16px;
+}
+
+#entry:selected {
+    background-color: #ca9ee6;
+    color: #11111b;
+    border-radius: 10px;
+    outline: none;
+}
+
+#text {
+    margin: 5px;
+}
+

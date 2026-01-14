@@ -1,0 +1,22 @@
+* {
+    background-image: none;
+    font-family: "JetBrainsMono Nerd Font";
+}
+
+window {
+    background-color: rgba(12, 12, 20, 0.1); /* Let the Hyprland blur do the work */
+}
+
+button {
+    border-radius: 100px; /* Perfect circles */
+    border: 3px solid rgba(202, 158, 230, 0.3); /* Keqing Purple */
+    background-color: rgba(30, 30, 46, 0.5);
+    margin: 100px; /* This makes the buttons smaller and centered */
+    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: rgba(202, 158, 230, 0.5);
+    border: 3px solid #ca9ee6;
+    box-shadow: 0 0 30px rgba(202, 158, 230, 0.6);
+}

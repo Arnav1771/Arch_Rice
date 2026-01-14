@@ -1,0 +1,125 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "margin": "8 12 0 12",
+    "spacing": 10, 
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "idle_inhibitor", "network", "memory", "pulseaudio", "cpu", "temperature", "custom/gpu-temp", "battery", "custom/power"],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "active": "󰮯",
+            "default": "󰊠"
+        }
+    },
+
+    "hyprland/window": {
+        "format": "  {}",
+        "max-length": 50,
+        "separate-outputs": true
+    },
+
+    "clock": { 
+        "format": "󰃰 {:%H:%M}",
+        "format-alt": "󰃰 {:%A, %B %d, %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ca9ee6'><b>{}</b></span>",
+                "days": "<span color='#cdd6f4'>{}</span>",
+                "today": "<span color='#f9e2af'><b><u>{}</u></b></span>"
+            }
+        },
+        "interval": 60 
+    },
+
+    "cpu": { 
+        "format": " {usage}%",
+        "interval": 2,
+        "on-click": "kitty -e btop",
+        "tooltip": true
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C"
+    },
+
+    "custom/gpu-temp": {
+        "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",
+        "format": "󰢮 {}°C",
+        "interval": 5
+    },
+
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "󰈀 Connected",
+        "format-disconnected": "󰖪 Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBits}  {bandwidthUpBits}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n󰩟 {ipaddr}\n {bandwidthDownBits}  {bandwidthUpBits}",
+        "on-click": "nm-connection-editor",
+        "interval": 3
+    },
+
+    "memory": {
+        "format": "  {}%",
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+        "on-click": "kitty -e btop",
+        "interval": 3
+    },
+
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["󰂎", "󰁺", "󰁾", "󰂀", "󰁹"],
+        "tooltip-format": "{timeTo}, {power}W"
+    },
+
+    "pulseaudio": { 
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+        "on-click": "pavucontrol",
+        "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5,
+        "smooth-scrolling-threshold": 1
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰅶",
+            "deactivated": "󰾪"
+        },
+        "tooltip-format-activated": "Idle inhibitor active",
+        "tooltip-format-deactivated": "Idle inhibitor inactive"
+    },
+
+   "custom/power": {
+    "format": "⏻",
+    "on-click": "~/.config/hypr/scripts/power-menu.sh",
+    "tooltip": false
+},
+
+   "custom/discord": {
+    "exec": "pidof discord > /dev/null 2>&1 && echo '󰙯'",
+    "format": "{}",
+    "interval": 2,
+    "on-click": "hyprctl dispatch focuswindow discord || discord",
+    "on-click-right": "killall discord",
+    "tooltip-format": "Discord | Right-click to quit"
+}
+}

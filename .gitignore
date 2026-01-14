@@ -1,0 +1,97 @@
+# VS Code / Code - OSS
+Code/
+Code - OSS/
+
+# Discord
+discord/
+Discord/
+
+# Electron apps
+Electron/
+obsidian/
+
+# Mozilla/Firefox (contains sensitive session data)
+mozilla/
+
+# System/Session
+session/
+dconf/
+
+# Package manager cache
+yay/
+
+# Go telemetry
+go/
+
+# OBS Studio (large files, frequent changes)
+obs-studio/
+
+# Pulse audio (system managed)
+pulse/
+
+# Vencord (Discord mod, frequently updated)
+Vencord/
+
+# KDE/Dolphin specific (if you're using Hyprland, these aren't needed)
+baloofileinformationrc
+dolphinrc
+trashrc
+
+# Cache and temporary files
+**/Cache/
+**/cache/
+**/Cookies
+**/Cookies-journal
+**/DIPS
+**/DIPS-wal
+**/*cache*/
+**/logs/
+**/Crashpad/
+**/GPUCache/
+**/Code Cache/
+**/Service Worker/
+**/Session Storage/
+**/Local Storage/
+**/blob_storage/
+**/Backups/
+**/CachedData/
+**/CachedExtensionVSIXs/
+**/CachedProfilesData/
+**/CachedConfigurations/
+**/DawnGraphiteCache/
+**/DawnWebGPUCache/
+**/WebStorage/
+**/IndexedDB/
+**/VideoDecodeStats/
+**/shared_proto_db/
+**/component_crx_cache/
+**/sentry/
+
+# Sensitive data
+**/machineid
+**/Network Persistent State
+**/TransportSecurity
+**/Trust Tokens*
+**/SharedStorage*
+**/Preferences
+**/Local State
+**/quotes.json
+**/settings.json
+**/domainMigrated
+**/id
+
+# Backup directories
+**/backups/
+hypr/backups/
+
+# Dictionaries (can be re-downloaded)
+**/Dictionaries/
+
+# Workspaces (VS Code workspaces)
+**/Workspaces/
+
+# CDM modules
+**/WidevineCdm/
+
+# Shared Dictionary
+**/Shared Dictionary/
