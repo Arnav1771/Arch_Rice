@@ -97,4 +97,153 @@ QListWidget, QTreeView { background: var(--bg_base); border: 1px solid var(--bor
 QListWidget::item:selected { background: var(--list_item_bg_selected); }
 QMenuBar { background: var(--bg_base); color: var(--text); }
 OBSEOF
+
+    # Apply theme to Firefox
+    FIREFOX_PROFILE=$(find ~/.config/mozilla/firefox ~/.mozilla/firefox -maxdepth 1 -type d -name "*.default-release" 2>/dev/null | head -1)
+    if [ -n "$FIREFOX_PROFILE" ]; then
+        mkdir -p "$FIREFOX_PROFILE/chrome"
+        cat > "$FIREFOX_PROFILE/chrome/userChrome.css" << FFEOF
+/* Pywal Firefox Theme - Auto Generated */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+:root {
+    --pywal-bg: $bg;
+    --pywal-fg: $fg;
+    --pywal-c1: $c1;
+    --pywal-c2: $c2;
+    --pywal-c3: $c3;
+    --pywal-c4: $c4;
+    --pywal-c5: $c5;
+    --pywal-c6: $c6;
+    --pywal-c8: $c8;
+}
+
+/* Main toolbar */
+#navigator-toolbox {
+    background: var(--pywal-bg) !important;
+    border-bottom: 1px solid var(--pywal-c8) !important;
+}
+
+/* URL bar */
+#urlbar-background {
+    background: var(--pywal-c1) !important;
+    border: 1px solid var(--pywal-c8) !important;
+}
+
+#urlbar-input {
+    color: var(--pywal-fg) !important;
+}
+
+/* Tabs */
+.tab-background {
+    background: var(--pywal-bg) !important;
+}
+
+.tab-background[selected="true"] {
+    background: var(--pywal-c4) !important;
+}
+
+.tabbrowser-tab:hover .tab-background:not([selected="true"]) {
+    background: var(--pywal-c3) !important;
+}
+
+.tab-text {
+    color: var(--pywal-fg) !important;
+}
+
+/* Tab bar */
+#TabsToolbar {
+    background: var(--pywal-bg) !important;
+}
+
+/* Sidebar */
+#sidebar-box {
+    background: var(--pywal-bg) !important;
+}
+
+/* Bookmarks toolbar */
+#PersonalToolbar {
+    background: var(--pywal-bg) !important;
+}
+
+toolbarbutton {
+    color: var(--pywal-fg) !important;
+}
+
+/* Menu popup */
+menupopup {
+    background: var(--pywal-bg) !important;
+    color: var(--pywal-fg) !important;
+}
+
+menuitem:hover {
+    background: var(--pywal-c4) !important;
+}
+FFEOF
+
+        # Also create userContent.css for web pages (new tab, etc)
+        cat > "$FIREFOX_PROFILE/chrome/userContent.css" << FFCEOF
+/* Pywal Firefox Content Theme - Transparent New Tab with Wallpaper */
+@-moz-document url("about:home"), url("about:newtab"), url("about:privatebrowsing") {
+    body {
+        background: url("file://$WALL_DIR/$selected_wall") no-repeat center center fixed !important;
+        background-size: cover !important;
+    }
+    
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(${bg_rgb}, 0.7) !important;
+        z-index: -1;
+    }
+    
+    /* Search box styling */
+    .search-wrapper input,
+    .search-handoff-button {
+        background-color: rgba(${bg_rgb}, 0.8) !important;
+        color: $fg !important;
+        border: 1px solid $c4 !important;
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Logo */
+    .logo-and-wordmark {
+        filter: drop-shadow(0 0 10px $c4);
+    }
+    
+    /* Top sites cards */
+    .top-site-outer .tile {
+        background-color: rgba(${bg_rgb}, 0.7) !important;
+        backdrop-filter: blur(5px);
+    }
+    
+    .top-site-outer:hover .tile {
+        background-color: rgba(${c4:1:6}, 0.5) !important;
+    }
+    
+    /* Section titles */
+    .section-title span {
+        color: $fg !important;
+    }
+    
+    /* Cards */
+    .card-outer {
+        background: rgba(${bg_rgb}, 0.6) !important;
+        backdrop-filter: blur(5px);
+    }
+}
+
+@-moz-document url-prefix("about:") {
+    :root {
+        --in-content-page-background: transparent !important;
+        --in-content-page-color: $fg !important;
+    }
+}
+FFCEOF
+        echo "Firefox theme applied! Restart Firefox to see changes."
+    fi
 fi
