@@ -5,8 +5,20 @@ WALL_DIR="$HOME/.config/hypr/wallpapers/"
 selected_wall=$(ls "$WALL_DIR" | rofi -dmenu -p "󰉼 Electro-System")
 
 if [ -n "$selected_wall" ]; then
-    swww img "$WALL_DIR/$selected_wall" --transition-type grow
+    awww img "$WALL_DIR/$selected_wall" --transition-type grow
     wal -i "$WALL_DIR/$selected_wall" -n
+    bash ~/.config/yazi/generate-yazi-theme.sh
+
+    # ⚡ Live-sync Hyprland border colors from fresh pywal palette
+    source "$HOME/.cache/wal/colors.sh"
+    # Strip # and add ff suffix → rgba(xxxxxxff) format Hyprland expects
+    c5="${color5//#/}"
+    c4="${color4//#/}"
+    c1="${color1//#/}"
+    c8="${color8//#/}"
+    hyprctl keyword general:col.active_border   "rgba(${c5}ff) rgba(${c4}ff) 45deg"
+    hyprctl keyword general:col.inactive_border "rgba(${c8}44)"
+
     killall waybar && waybar &
     # Forces Kitty to refresh with Keqing's colors
     kill -SIGUSR1 $(pidof kitty)

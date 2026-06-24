@@ -4,9 +4,9 @@
     "height": 34,
     "margin": "8 12 0 12",
     "spacing": 10, 
-    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-left": ["hyprland/workspaces", "mpris", "hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "idle_inhibitor", "network", "memory", "pulseaudio", "cpu", "temperature", "custom/gpu-temp", "battery", "custom/power"],
+    "modules-right": ["tray", "idle_inhibitor", "network", "bluetooth", "memory", "cpu", "temperature", "custom/gpu-temp", "backlight", "pulseaudio", "battery", "custom/power"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -121,5 +121,40 @@
     "on-click": "hyprctl dispatch focuswindow discord || discord",
     "on-click-right": "killall discord",
     "tooltip-format": "Discord | Right-click to quit"
-}
+},
+
+    "mpris": {
+        "format": "{player_icon} {title} - {artist}",
+        "format-paused": "{status_icon} <i>{title} - {artist}</i>",
+        "player-icons": {
+            "default": "▶",
+            "spotify": "󰓇"
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "max-length": 35,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-"
+    },
+
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "kitty -e bluetoothctl"
+    }
 }
