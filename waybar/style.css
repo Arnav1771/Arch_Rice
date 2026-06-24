@@ -1,179 +1,235 @@
 @import "../../.cache/wal/colors-waybar.css";
 
-/* Now use the variables in your modules */
-#workspaces, #clock, #pulseaudio, #cpu, #memory, #battery {
-    background: @background; /* This comes from the wallpaper */
-    color: @foreground;     /* This also comes from the wallpaper */
-    border: 1px solid @color5;
-}
+/* ============================================================
+   KEQING ELECTRO — WAYBAR STYLE
+   Clean, minimal. Glow only where it matters.
+   ============================================================ */
 
 * {
-    font-family: "JetBrainsMono Nerd Font", sans-serif;
-    font-size: 13px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12.5px;
     font-weight: bold;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s ease;
+    border: none;
+    border-radius: 0;
 }
 
+/* ── Bar window ─────────────────────────────────────────── */
 window#waybar {
-    background: rgba(15, 10, 25, 0.45); /* Deep translucent purple/black */
-    border-bottom: 2px solid rgba(202, 158, 230, 0.15);
+    background: rgba(10, 8, 18, 0.55);
+    border-bottom: 1px solid rgba(202, 158, 230, 0.12);
 }
 
-#workspaces, #window, #clock, #pulseaudio, #cpu, #temperature, #custom-gpu-temp, #battery, #custom-power, #network, #memory, #tray, #idle_inhibitor, #mpris, #backlight, #bluetooth {
-    background: rgba(20, 15, 30, 0.7); /* Deep translucent violet */
-    color: #ca9ee6; /* Electro Purple */
-    border-radius: 12px;
-    padding: 0 12px;
-    border: 1.5px solid rgba(202, 158, 230, 0.35);
-    box-shadow: 0 0 6px rgba(202, 158, 230, 0.2);
+/* ── Base module style ──────────────────────────────────── */
+#workspaces,
+#mpris,
+#clock,
+#network,
+#bluetooth,
+#cpu,
+#temperature,
+#memory,
+#backlight,
+#pulseaudio,
+#battery,
+#tray,
+#custom-power {
+    color: #cdd6f4;
+    padding: 0 10px;
+    background: rgba(22, 16, 36, 0.65);
+    border-radius: 10px;
+    margin: 4px 2px;
 }
 
-/* Hover effects with electro surge glow */
-#pulseaudio:hover, #cpu:hover, #temperature:hover, #custom-gpu-temp:hover, #battery:hover, #network:hover, #memory:hover, #backlight:hover, #bluetooth:hover, #mpris:hover {
-    background: rgba(35, 20, 50, 0.85);
-    border: 1.5px solid rgba(202, 158, 230, 0.8);
-    box-shadow: 0 0 15px rgba(202, 158, 230, 0.6);
+/* ── Hover — only a subtle lift, no christmas tree ──────── */
+#network:hover,
+#bluetooth:hover,
+#cpu:hover,
+#temperature:hover,
+#memory:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#battery:hover,
+#mpris:hover {
+    background: rgba(40, 28, 58, 0.85);
+    color: #ca9ee6;
+}
+
+/* ── Workspaces ─────────────────────────────────────────── */
+#workspaces {
+    padding: 0 4px;
 }
 
 #workspaces button {
     color: rgba(202, 158, 230, 0.3);
-    padding: 0 8px;
-    transition: all 0.3s ease;
+    padding: 0 6px;
+    background: transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    min-width: 0;
 }
 
 #workspaces button:hover {
-    color: rgba(202, 158, 230, 0.6);
+    color: rgba(202, 158, 230, 0.7);
     background: rgba(202, 158, 230, 0.1);
-    border-radius: 10px;
 }
 
 #workspaces button.active {
     color: #f9e2af;
-    background: rgba(202, 158, 230, 0.25);
-    border: 1.5px solid #ca9ee6;
-    box-shadow: 0 0 8px rgba(202, 158, 230, 0.5);
-    border-radius: 10px;
+    background: rgba(202, 158, 230, 0.2);
+    box-shadow: 0 0 8px rgba(202, 158, 230, 0.4);
 }
 
-/* Window title */
-#window {
-    color: #cdd6f4;
+/* ── Media player ───────────────────────────────────────── */
+#mpris {
+    color: #a6e3a1;
     font-weight: normal;
+    font-style: italic;
 }
 
-/* Network states */
+#mpris.paused {
+    color: rgba(166, 227, 161, 0.5);
+}
+
+/* ── Clock — the star of the show ──────────────────────── */
+#clock {
+    color: #f9e2af;
+    font-size: 13px;
+    font-weight: bold;
+    background: rgba(22, 16, 36, 0.75);
+    box-shadow: 0 0 12px rgba(249, 226, 175, 0.2);
+    padding: 0 16px;
+}
+
+/* ── Network ────────────────────────────────────────────── */
+#network {
+    color: #94e2d5;
+}
+
 #network.disconnected {
     color: #f38ba8;
-}
-
-#network.wifi {
-    color: #94e2d5;
 }
 
 #network.ethernet {
     color: #a6e3a1;
 }
 
-/* Memory warning */
-#memory.warning {
-    color: #fab387;
-    border-color: #fab387;
+/* ── Bluetooth ──────────────────────────────────────────── */
+#bluetooth {
+    color: rgba(202, 158, 230, 0.4);
 }
 
-#memory.critical {
-    color: #f38ba8;
-    border-color: #f38ba8;
+#bluetooth.on {
+    color: #89b4fa;
 }
 
-/* CPU warning */
+#bluetooth.connected {
+    color: #a6e3a1;
+}
+
+#bluetooth.discoverable,
+#bluetooth.discovering,
+#bluetooth.pairable {
+    color: #f9e2af;
+}
+
+/* ── CPU ────────────────────────────────────────────────── */
+#cpu {
+    color: #89dceb;
+}
+
 #cpu.warning {
     color: #fab387;
 }
 
-/* Temperature states */
-#temperature.critical {
+#cpu.critical {
     color: #f38ba8;
-    border-color: #f38ba8;
 }
 
-/* Charging Animation/Color */
+/* ── CPU Temperature ────────────────────────────────────── */
+#temperature {
+    color: #89dceb;
+}
+
+#temperature.critical {
+    color: #f38ba8;
+    box-shadow: 0 0 10px rgba(243, 139, 168, 0.5);
+}
+
+/* ── Memory ─────────────────────────────────────────────── */
+#memory {
+    color: #cba6f7;
+}
+
+#memory.warning {
+    color: #fab387;
+}
+
+#memory.critical {
+    color: #f38ba8;
+}
+
+/* ── Brightness ─────────────────────────────────────────── */
+#backlight {
+    color: #f9e2af;
+}
+
+/* ── Volume ─────────────────────────────────────────────── */
+#pulseaudio {
+    color: #cdd6f4;
+}
+
+#pulseaudio.muted {
+    color: rgba(205, 214, 244, 0.35);
+}
+
+/* ── Battery ────────────────────────────────────────────── */
+#battery {
+    color: #a6e3a1;
+}
+
 #battery.charging {
     color: #a6e3a1;
-    border: 1px solid #a6e3a1;
+}
+
+#battery.plugged {
+    color: #94e2d5;
 }
 
 #battery.warning:not(.charging) {
     color: #fab387;
-    border-color: #fab387;
 }
 
 #battery.critical:not(.charging) {
     color: #f38ba8;
-    border-color: #f38ba8;
+    box-shadow: 0 0 10px rgba(243, 139, 168, 0.5);
 }
 
-#clock {
-    color: #f9e2af;
-    font-weight: bold;
-}
-
-/* Idle inhibitor states */
-#idle_inhibitor.activated {
-    color: #f9e2af;
-    border-color: #f9e2af;
-}
-
-#idle_inhibitor.deactivated {
-    color: rgba(202, 158, 230, 0.5);
-}
-
-/* Tray */
+/* ── Tray ───────────────────────────────────────────────── */
 #tray {
-    padding: 0 8px;
+    padding: 0 6px;
 }
 
 #tray > .passive {
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 #tray > .needs-attention {
     color: #f38ba8;
 }
 
+/* ── Power button ───────────────────────────────────────── */
 #custom-power {
-    background: rgba(202, 158, 230, 0.2);
     color: #ca9ee6;
-    border: 1.5px solid #ca9ee6;
-    box-shadow: 0 0 8px rgba(202, 158, 230, 0.4);
-    padding: 0 14px;
+    background: rgba(202, 158, 230, 0.12);
+    border: 1px solid rgba(202, 158, 230, 0.3);
+    padding: 0 13px;
+    border-radius: 10px;
 }
 
 #custom-power:hover {
-    background: rgba(249, 226, 175, 0.3);
     color: #f9e2af;
-    border-color: #f9e2af;
-    box-shadow: 0 0 15px rgba(249, 226, 175, 0.7);
-}
-
-/* Bluetooth states */
-#bluetooth.connected {
-    color: #a6e3a1;
-}
-
-#bluetooth.discoverable, #bluetooth.discovering, #bluetooth.pairable {
-    color: #f9e2af;
-}
-
-/* Backlight brightness */
-#backlight {
-    color: #f9e2af;
-}
-
-/* Media player */
-#mpris {
-    color: #a6e3a1;
-}
-
-#mpris.paused {
-    color: rgba(166, 227, 161, 0.6);
+    background: rgba(249, 226, 175, 0.15);
+    border-color: rgba(249, 226, 175, 0.5);
+    box-shadow: 0 0 12px rgba(249, 226, 175, 0.4);
 }

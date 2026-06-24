@@ -1,160 +1,153 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 34,
+    "height": 36,
     "margin": "8 12 0 12",
-    "spacing": 10, 
-    "modules-left": ["hyprland/workspaces", "mpris", "hyprland/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "idle_inhibitor", "network", "bluetooth", "memory", "cpu", "temperature", "custom/gpu-temp", "backlight", "pulseaudio", "battery", "custom/power"],
+    "spacing": 6,
 
+    "modules-left":   ["hyprland/workspaces", "mpris"],
+    "modules-center": ["clock"],
+    "modules-right":  ["tray", "network", "bluetooth", "cpu", "temperature", "memory", "backlight", "pulseaudio", "battery", "custom/power"],
+
+    // ── Workspaces ───────────────────────────────────────────
     "hyprland/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
         "format-icons": {
-            "active": "󰮯",
-            "default": "󰊠"
-        }
+            "active":  "󰮯",
+            "default": "󰊠",
+            "empty":   "󰊠"
+        },
+        "persistent-workspaces": {}
     },
 
-    "hyprland/window": {
-        "format": "  {}",
-        "max-length": 50,
-        "separate-outputs": true
+    // ── Media Player ─────────────────────────────────────────
+    "mpris": {
+        "format": "{player_icon} {title}",
+        "format-paused": "⏸ {title}",
+        "player-icons": {
+            "default": "▶",
+            "spotify": "󰓇"
+        },
+        "status-icons": { "paused": "⏸" },
+        "max-length": 28,
+        "on-click":       "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-scroll-up":   "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "tooltip-format": "{player}: {title} — {artist}"
     },
 
-    "clock": { 
-        "format": "󰃰 {:%H:%M}",
-        "format-alt": "󰃰 {:%A, %B %d, %Y}",
+    // ── Clock ────────────────────────────────────────────────
+    "clock": {
+        "format":     "󰃰 {:%H:%M}",
+        "format-alt": "󰃰 {:%a, %d %b %Y}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "month",
             "on-scroll": 1,
             "format": {
-                "months": "<span color='#ca9ee6'><b>{}</b></span>",
-                "days": "<span color='#cdd6f4'>{}</span>",
-                "today": "<span color='#f9e2af'><b><u>{}</u></b></span>"
+                "months":  "<span color='#ca9ee6'><b>{}</b></span>",
+                "days":    "<span color='#cdd6f4'>{}</span>",
+                "today":   "<span color='#f9e2af'><b><u>{}</u></b></span>"
             }
         },
-        "interval": 60 
+        "interval": 60
     },
 
-    "cpu": { 
-        "format": " {usage}%",
-        "interval": 2,
-        "on-click": "kitty -e btop",
-        "tooltip": true
-    },
-
-    "temperature": {
-        "critical-threshold": 80,
-        "format": " {temperatureC}°C"
-    },
-
-    "custom/gpu-temp": {
-        "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",
-        "format": "󰢮 {}°C",
-        "interval": 5
-    },
-
+    // ── Network ──────────────────────────────────────────────
     "network": {
-        "format-wifi": "  {signalStrength}%",
-        "format-ethernet": "󰈀 Connected",
-        "format-disconnected": "󰖪 Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBits}  {bandwidthUpBits}",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n󰩟 {ipaddr}\n {bandwidthDownBits}  {bandwidthUpBits}",
+        "format-wifi":       " {signalStrength}%",
+        "format-ethernet":   "󰈀",
+        "format-disconnected":"󰖪",
+        "tooltip-format-wifi": "{essid}\n󰩟 {ipaddr}\n {bandwidthDownBits}  {bandwidthUpBits}",
+        "tooltip-format":      "{ifname}: {ipaddr}\n {bandwidthDownBits}  {bandwidthUpBits}",
         "on-click": "nm-connection-editor",
         "interval": 3
     },
 
+    // ── Bluetooth ────────────────────────────────────────────
+    "bluetooth": {
+        "format":           "󰂲",
+        "format-on":        "󰂯",
+        "format-off":       "󰂲",
+        "format-disabled":  "󰂲",
+        "format-connected": "󰂱 {device_alias}",
+        "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+        "tooltip-format":           "Bluetooth: {status}",
+        "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "  {device_alias}",
+        "tooltip-format-enumerate-connected-battery": "  {device_alias} ({device_battery_percentage}%)",
+        "on-click":       "blueman-manager",
+        "on-click-right": "rfkill toggle bluetooth"
+    },
+
+    // ── CPU ──────────────────────────────────────────────────
+    "cpu": {
+        "format": " {usage}%",
+        "interval": 2,
+        "on-click": "kitty -e btop",
+        "tooltip-format": "CPU: {usage}%\nLoad: {load}"
+    },
+
+    // ── CPU Temperature ──────────────────────────────────────
+    "temperature": {
+        "critical-threshold": 85,
+        "format":          " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C",
+        "tooltip-format": "CPU Temp: {temperatureC}°C",
+        "interval": 3
+    },
+
+    // ── Memory ───────────────────────────────────────────────
     "memory": {
-        "format": "  {}%",
+        "format": "󰍛 {percentage}%",
         "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
         "on-click": "kitty -e btop",
         "interval": 3
     },
 
-    "battery": {
-        "states": { "warning": 30, "critical": 15 },
-        "format": "{icon} {capacity}%",
-        "format-charging": "󱐋 {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-icons": ["󰂎", "󰁺", "󰁾", "󰂀", "󰁹"],
-        "tooltip-format": "{timeTo}, {power}W"
-    },
-
-    "pulseaudio": { 
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟 {volume}%",
-        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
-        "on-click": "pavucontrol",
-        "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "scroll-step": 5,
-        "smooth-scrolling-threshold": 1
-    },
-
-    "tray": {
-        "icon-size": 18,
-        "spacing": 8
-    },
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "󰅶",
-            "deactivated": "󰾪"
-        },
-        "tooltip-format-activated": "Idle inhibitor active",
-        "tooltip-format-deactivated": "Idle inhibitor inactive"
-    },
-
-   "custom/power": {
-    "format": "⏻",
-    "on-click": "~/.config/hypr/scripts/power-menu.sh",
-    "tooltip": false
-},
-
-   "custom/discord": {
-    "exec": "pidof discord > /dev/null 2>&1 && echo '󰙯'",
-    "format": "{}",
-    "interval": 2,
-    "on-click": "hyprctl dispatch focuswindow discord || discord",
-    "on-click-right": "killall discord",
-    "tooltip-format": "Discord | Right-click to quit"
-},
-
-    "mpris": {
-        "format": "{player_icon} {title} - {artist}",
-        "format-paused": "{status_icon} <i>{title} - {artist}</i>",
-        "player-icons": {
-            "default": "▶",
-            "spotify": "󰓇"
-        },
-        "status-icons": {
-            "paused": "⏸"
-        },
-        "max-length": 35,
-        "on-click": "playerctl play-pause",
-        "on-click-right": "playerctl next",
-        "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous"
-    },
-
+    // ── Backlight ────────────────────────────────────────────
     "backlight": {
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
-        "on-scroll-up": "brightnessctl set 1%+",
-        "on-scroll-down": "brightnessctl set 1%-"
+        "on-scroll-up":   "brightnessctl set 2%+",
+        "on-scroll-down": "brightnessctl set 2%-",
+        "tooltip": false
     },
 
-    "bluetooth": {
-        "format": " {status}",
-        "format-connected": " {device_alias}",
-        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-        "on-click": "kitty -e bluetoothctl"
+    // ── Volume ───────────────────────────────────────────────
+    "pulseaudio": {
+        "format":       "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+        "on-click":        "pavucontrol",
+        "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5,
+        "tooltip-format": "Volume: {volume}%\n{desc}"
+    },
+
+    // ── Battery ──────────────────────────────────────────────
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format":          "{icon} {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-plugged":  " {capacity}%",
+        "format-icons":    ["󰂎", "󰁺", "󰁾", "󰂀", "󰁹"],
+        "tooltip-format":  "{timeTo} · {power:.1f}W",
+        "interval": 30
+    },
+
+    // ── Tray ─────────────────────────────────────────────────
+    "tray": {
+        "icon-size": 16,
+        "spacing": 6
+    },
+
+    // ── Power ────────────────────────────────────────────────
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "~/.config/hypr/scripts/power-menu.sh",
+        "tooltip": false
     }
 }
