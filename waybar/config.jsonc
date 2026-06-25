@@ -32,7 +32,7 @@
         "persistent-workspaces": {
             "*": 5
         },
-        "window-rewrite-default": "󰣇",
+        "window-rewrite-default": "",
         "window-rewrite": {
             "class<firefox>":           "󰈹",
             "class<firefox> title<.*github.*>": "󰊤",
