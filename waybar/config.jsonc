@@ -11,7 +11,8 @@
 
     // ── Workspaces ───────────────────────────────────────────
     "hyprland/workspaces": {
-        "format": "{icon}",
+        "format": "{icon} {windows}",
+        "format-window-separator": " ",
         "on-click": "activate",
         "format-icons": {
             "1":  "刻",
@@ -30,6 +31,29 @@
         },
         "persistent-workspaces": {
             "*": 5
+        },
+        "window-rewrite-default": "󰣇",
+        "window-rewrite": {
+            "class<firefox>":           "󰈹",
+            "class<firefox> title<.*github.*>": "󰊤",
+            "class<firefox> title<.*youtube.*>": "󰗃",
+            "class<kitty>":             "",
+            "class<code>":              "󰅩",
+            "class<Code>":              "󰅩",
+            "class<discord>":           "󰙯",
+            "class<Discord>":           "󰙯",
+            "class<spotify>":           "󰓇",
+            "class<Spotify>":           "󰓇",
+            "class<obsidian>":          "󰠮",
+            "class<obs-studio>":        "󰐌",
+            "class<proton.vpn.app.gtk>": "󰒃",
+            "class<pavucontrol>":       "󰕾",
+            "class<blueman-manager>":   "󰂯",
+            "class<nm-connection-editor>": "󰤨",
+            "class<btop>":              "󰻟",
+            "class<yazi>":              "󰉋",
+            "class<mpv>":               "󰎁",
+            "class<keqing-cheatsheet>": "⚡"
         }
     },
 
