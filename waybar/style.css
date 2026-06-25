@@ -61,43 +61,38 @@ window#waybar {
 }
 
 #workspaces button {
-    color: rgba(202, 158, 230, 0.2);
-    padding: 0 7px;
+    color: rgba(202, 158, 230, 0.25);
+    padding: 0 8px;
     background: transparent;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     min-width: 0;
-    font-family: "Noto Sans CJK JP", "JetBrainsMono Nerd Font", monospace;
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 1px;
+    font-size: 13px;
 }
 
 #workspaces button:hover {
-    color: rgba(202, 158, 230, 0.6);
+    color: rgba(202, 158, 230, 0.65);
     background: rgba(202, 158, 230, 0.08);
     text-shadow: 0 0 8px rgba(202, 158, 230, 0.5);
 }
 
 #workspaces button.active {
     color: #f9e2af;
-    background: rgba(249, 226, 175, 0.12);
+    background: rgba(249, 226, 175, 0.1);
     border-radius: 8px;
-    box-shadow: 0 0 12px rgba(249, 226, 175, 0.35),
-                inset 0 0 8px rgba(249, 226, 175, 0.05);
-    text-shadow: 0 0 16px rgba(249, 226, 175, 0.9),
-                 0 0 32px rgba(249, 226, 175, 0.4);
-    font-size: 16px;
+    box-shadow: 0 0 10px rgba(249, 226, 175, 0.3);
+    text-shadow: 0 0 14px rgba(249, 226, 175, 0.85),
+                 0 0 28px rgba(249, 226, 175, 0.35);
 }
 
 #workspaces button.occupied:not(.active) {
-    color: rgba(202, 158, 230, 0.55);
+    color: rgba(202, 158, 230, 0.6);
     text-shadow: 0 0 6px rgba(202, 158, 230, 0.3);
 }
 
 #workspaces button.empty {
-    color: rgba(202, 158, 230, 0.12);
-    font-size: 10px;
+    color: rgba(202, 158, 230, 0.15);
+    font-size: 9px;
 }
 
 #workspaces button.urgent {
