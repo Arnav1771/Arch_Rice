@@ -138,13 +138,13 @@ ttf-jetbrains-mono-nerd
 
 ```bash
 # Clone
-git clone https://github.com/Arnav1771/Arch_Rice.git ~/Downloads/Arch_Rice
+git clone https://github.com/Arnav1771/Arch_Rice.git "~/IMP DOCS/Arch_Rice"
 
 # Symlink to ~/.config (what this repo does)
 # configs are symlinked so edits here reflect live
 
 # Add the dots alias to your .zshrc for easy git management:
-echo 'alias dots="git -C ~/Downloads/Arch_Rice"' >> ~/.zshrc
+echo 'alias dots="git -C ~/IMP\ DOCS/Arch_Rice"' >> ~/.zshrc
 
 # Push changes from anywhere:
 dots add .
