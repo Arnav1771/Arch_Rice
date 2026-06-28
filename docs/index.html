@@ -12,6 +12,11 @@
     <!-- Epic Matrix Rain Canvas -->
     <canvas id="matrix-canvas"></canvas>
 
+    <!-- Hacker HUD (Top Left) -->
+    <div id="hacker-hud">
+        <div id="hud-content"></div>
+    </div>
+
     <!-- Arch Boot Sequence -->
     <div id="boot-screen">
         <p class="boot-line white">[    0.000000] Linux version 6.8.0-arch1-1</p>
@@ -144,7 +149,7 @@
     <script>
         lucide.createIcons();
         
-        // --- Custom Cursor Logic ---
+        // --- Custom Cursor & Particle Trail Logic ---
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
         
@@ -157,7 +162,67 @@
             
             cursorOutline.style.left = `${posX}px`;
             cursorOutline.style.top = `${posY}px`;
+            
+            // Particle Generation (Throttle slightly to save FPS)
+            if (Math.random() > 0.4) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = posX + 'px';
+                particle.style.top = posY + 'px';
+                
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random cyan or purple
+                particle.style.backgroundColor = Math.random() > 0.5 ? '#89dceb' : '#cba6f7';
+                particle.style.boxShadow = `0 0 10px ${particle.style.backgroundColor}`;
+                
+                // Random drift direction
+                const tx = (Math.random() - 0.5) * 100 + 'px';
+                const ty = (Math.random() - 0.5) * 100 + 'px';
+                particle.style.setProperty('--tx', tx);
+                particle.style.setProperty('--ty', ty);
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 800);
+            }
         });
+
+        // --- Screen Shake on Click ---
+        window.addEventListener('click', () => {
+            document.body.classList.add('shake');
+            setTimeout(() => document.body.classList.remove('shake'), 300);
+        });
+
+        // --- Hacker HUD Logic ---
+        const hudContent = document.getElementById('hud-content');
+        const hexChars = '0123456789ABCDEF';
+        function genHex() {
+            let h = '0x';
+            for(let i=0; i<8; i++) h += hexChars[Math.floor(Math.random() * 16)];
+            return h;
+        }
+
+        setInterval(() => {
+            const cpu = Math.floor(Math.random() * 100);
+            const ram = Math.floor(Math.random() * 32000);
+            const net = Math.floor(Math.random() * 999);
+            
+            const bars = Math.floor(cpu / 5);
+            const cpuBar = '[' + '|'.repeat(bars) + ' '.repeat(20 - bars) + ']';
+            
+            let html = `<p class="hud-line">SYS.CP_LOAD: ${cpuBar} ${cpu}%</p>`;
+            html += `<p class="hud-line">SYS.MEM_ALL: ${ram} MB / 32768 MB</p>`;
+            html += `<p class="hud-line">NET.UPLINK : ${net} Mbps [SECURED]</p>`;
+            html += `<p class="hud-line">------------------------------------</p>`;
+            
+            for(let i=0; i<8; i++) {
+                html += `<p class="hud-line">${genHex()} ${genHex()} ${genHex()} ${genHex()}</p>`;
+            }
+            
+            hudContent.innerHTML = html;
+        }, 120);
 
         // --- Interactive 3D Parallax Tilt (VanillaTilt Logic) ---
         document.querySelectorAll('.tilt-effect').forEach(card => {
@@ -169,14 +234,10 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
-                // Calculate rotation limits (max 8 degrees)
                 const rotateX = ((y - centerY) / centerY) * -8;
                 const rotateY = ((x - centerX) / centerX) * 8;
                 
                 card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                
-                // Optional: Add a glare effect using pseudo elements in CSS, 
-                // but for now the glassmorphism shadow does enough.
             });
             
             card.addEventListener('mouseleave', () => {
@@ -215,7 +276,6 @@
             for(let i = 0; i < drops.length; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
                 
-                // Random cyan or purple matrix
                 if (Math.random() > 0.8) ctx.fillStyle = '#cba6f7';
                 else ctx.fillStyle = '#89dceb';
                 
@@ -262,7 +322,7 @@
                     setTimeout(typeWriter, 20); // Typing speed
                 }
             }
-            setTimeout(typeWriter, 500); // Wait a half sec after boot screen clears
+            setTimeout(typeWriter, 500);
             
         }, bootDelay + 600);
 
