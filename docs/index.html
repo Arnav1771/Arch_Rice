@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keqing Electro ⚡ Arch Hyprland Rice</title>
+    <title>Keqing Electro ⚡ Arch Hyprland</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- Background Elements -->
     <div class="bg-glow purple-glow"></div>
-    <div class="bg-glow gold-glow"></div>
+    <div class="bg-glow cyan-glow"></div>
 
     <nav class="glass-nav">
         <div class="nav-content">
-            <div class="logo">⚡ <span class="gradient-text">Electro Rice</span></div>
+            <div class="logo"><i data-lucide="zap" style="color: #f9e2af;"></i> <span class="gradient-text">Arch Rice</span></div>
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#showcase">Showcase</a>
-                <a href="#install" class="btn-primary">Install Now</a>
+                <a href="https://github.com/Arnav1771/Arch_Rice" class="btn-primary" target="_blank">View Source</a>
             </div>
         </div>
     </nav>
@@ -28,80 +28,82 @@
         <section class="hero">
             <div class="hero-content">
                 <h1 class="fade-in-up">Keqing <span class="gradient-text">Electro</span></h1>
-                <p class="subtitle fade-in-up delay-1">A breathtaking, dynamic Hyprland desktop environment for Arch Linux. Powered by Pywal, Waybar, and absolute elegance.</p>
+                <p class="subtitle fade-in-up delay-1">An ultra-premium, deeply customized Hyprland desktop environment for Arch Linux. Engineered with dynamic Pywal sync, fluid Bezier animations, and absolute elegance.</p>
                 <div class="cta-group fade-in-up delay-2">
                     <a href="https://github.com/Arnav1771/Arch_Rice" class="btn-primary" target="_blank">
-                        <i data-lucide="github"></i> View on GitHub
+                        <i data-lucide="github"></i> Explore Repository
                     </a>
                     <a href="#showcase" class="btn-secondary">
-                        <i data-lucide="image"></i> View Gallery
+                        <i data-lucide="play-circle"></i> Watch Showcase
                     </a>
                 </div>
             </div>
             
             <div class="hero-image-container fade-in-up delay-3">
-                <div class="glass-panel screenshot-wrapper">
+                <div class="terminal-frame">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot close"></div>
+                            <div class="dot min"></div>
+                            <div class="dot max"></div>
+                        </div>
+                        <div class="terminal-title">keqing@archlinux:~</div>
+                    </div>
                     <video src="assets/showcase3.mp4" class="hero-screenshot" autoplay loop muted playsinline poster="assets/showcase-apps.png"></video>
-                    <div class="floating-badge badge-waybar">
-                        <i data-lucide="music"></i> Cava & Audio Sync
-                    </div>
-                    <div class="floating-badge badge-pywal">
-                        <i data-lucide="palette"></i> Pywal Themed
-                    </div>
+                </div>
+                
+                <div class="floating-badge badge-waybar">
+                    <i data-lucide="terminal"></i> Cava + Live Code
+                </div>
+                <div class="floating-badge badge-pywal">
+                    <i data-lucide="palette"></i> Pywal Themed
                 </div>
             </div>
         </section>
 
         <section id="features" class="features">
-            <h2 class="section-title">Lightning <span class="gradient-text">Fast</span> & Beautiful</h2>
+            <h2 class="section-title">Lightning <span class="gradient-text">Fast</span> Workflow</h2>
             <div class="feature-grid">
                 <div class="feature-card glass-panel">
                     <div class="feature-icon"><i data-lucide="sparkles"></i></div>
                     <h3>Dynamic Theming</h3>
-                    <p>Change your wallpaper with SUPER+T or SUPER+SHIFT+W and watch the entire OS color scheme adapt instantly using Pywal.</p>
+                    <p>Trigger SUPER+SHIFT+W to select a wallpaper via Rofi. Watch as Pywal instantly extracts the color palette and dynamically themes your entire OS on the fly.</p>
                 </div>
                 <div class="feature-card glass-panel">
                     <div class="feature-icon"><i data-lucide="layout-panel-left"></i></div>
-                    <h3>Epic Waybar</h3>
-                    <p>Floating glass islands, live app icons, Japanese Kanji workspace indicators, and integrated Bluetooth GUI.</p>
+                    <h3>Intelligent Waybar</h3>
+                    <p>Floating glass islands featuring live active window titles, media player synchronization (MPRIS), Japanese Kanji workspaces, and network integrations.</p>
                 </div>
                 <div class="feature-card glass-panel">
                     <div class="feature-icon"><i data-lucide="zap"></i></div>
-                    <h3>Fluid Animations</h3>
-                    <p>Randomized bezier curves and transition effects when switching workspaces. Every switch feels uniquely satisfying.</p>
+                    <h3>Fluid Physics</h3>
+                    <p>Custom-tuned randomized bezier curves. Every window spawn, workspace transition, and resizing action feels buttery smooth and incredibly satisfying.</p>
                 </div>
             </div>
         </section>
 
         <section id="showcase" class="features">
-            <h2 class="section-title">The <span class="gradient-text">Showcase</span></h2>
+            <h2 class="section-title">The <span class="gradient-text">Archive</span></h2>
             <div class="gallery-grid">
                 <div class="gallery-card glass-panel fade-in-up">
                     <img src="assets/showcase-clean.png" alt="Clean Desktop">
                     <div class="gallery-info">
-                        <h3>Clean Aesthetics</h3>
-                        <p>Minimalist layout highlighting the custom Waybar and dynamic wallpaper.</p>
+                        <h3>Pristine Desktop</h3>
+                        <p>A minimalist layout designed to eliminate distractions, highlighting the custom floating Waybar and the breathtaking electro wallpaper.</p>
                     </div>
                 </div>
                 <div class="gallery-card glass-panel fade-in-up delay-1">
                     <img src="assets/showcase-apps.png" alt="Apps & Tiling">
                     <div class="gallery-info">
-                        <h3>Perfect Tiling</h3>
-                        <p>Hyprland's master layout with Yazi and Btop running natively in Kitty terminals.</p>
+                        <h3>Master Layout Tiling</h3>
+                        <p>Hyprland's native master layout in action, featuring Yazi and Btop running natively in Kitty terminals with pure frosted glass transparency.</p>
                     </div>
                 </div>
                 <div class="gallery-card glass-panel fade-in-up delay-2">
-                    <video src="assets/showcase.mp4" autoplay loop muted playsinline style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem;"></video>
+                    <video src="assets/showcase.mp4" autoplay loop muted playsinline></video>
                     <div class="gallery-info">
-                        <h3>Dynamic Workflow</h3>
-                        <p>Fully automated demonstration of Pywal instantly updating the entire system theme.</p>
-                    </div>
-                </div>
-                <div class="gallery-card glass-panel fade-in-up delay-2">
-                    <img src="assets/showcase-dynamic.png" alt="Dynamic Theming">
-                    <div class="gallery-info">
-                        <h3>Instant Pywal Sync</h3>
-                        <p>Change wallpaper and watch active borders, terminal colors, and the bar instantly shift hues.</p>
+                        <h3>Automated Theme Deployment</h3>
+                        <p>A legacy showcase demonstrating the instant Pywal synchronization across active borders, terminal environments, and the Waybar.</p>
                     </div>
                 </div>
             </div>
@@ -115,14 +117,13 @@
     <script>
         lucide.createIcons();
         
-        // Simple scroll animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.feature-card').forEach((el) => observer.observe(el));
     </script>
