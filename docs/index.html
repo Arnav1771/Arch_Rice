@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keqing Electro ⚡ Arch Hyprland Rice</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-glow purple-glow"></div>
+    <div class="bg-glow gold-glow"></div>
+
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">⚡ <span class="gradient-text">Electro Rice</span></div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#showcase">Showcase</a>
+                <a href="#install" class="btn-primary">Install Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="fade-in-up">Keqing <span class="gradient-text">Electro</span></h1>
+                <p class="subtitle fade-in-up delay-1">A breathtaking, dynamic Hyprland desktop environment for Arch Linux. Powered by Pywal, Waybar, and absolute elegance.</p>
+                <div class="cta-group fade-in-up delay-2">
+                    <a href="https://github.com/Arnav1771/Arch_Rice" class="btn-primary" target="_blank">
+                        <i data-lucide="github"></i> View on GitHub
+                    </a>
+                    <a href="#showcase" class="btn-secondary">
+                        <i data-lucide="image"></i> View Gallery
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image-container fade-in-up delay-3">
+                <div class="glass-panel screenshot-wrapper">
+                    <img src="assets/hero-screenshot.png" alt="Hyprland Desktop Screenshot" class="hero-screenshot">
+                    <div class="floating-badge badge-waybar">
+                        <i data-lucide="layout"></i> Custom Waybar
+                    </div>
+                    <div class="floating-badge badge-pywal">
+                        <i data-lucide="palette"></i> Pywal Themed
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2 class="section-title">Lightning <span class="gradient-text">Fast</span> & Beautiful</h2>
+            <div class="feature-grid">
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon"><i data-lucide="sparkles"></i></div>
+                    <h3>Dynamic Theming</h3>
+                    <p>Change your wallpaper with SUPER+T or SUPER+SHIFT+W and watch the entire OS color scheme adapt instantly using Pywal.</p>
+                </div>
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon"><i data-lucide="layout-panel-left"></i></div>
+                    <h3>Epic Waybar</h3>
+                    <p>Floating glass islands, live app icons, Japanese Kanji workspace indicators, and integrated Bluetooth GUI.</p>
+                </div>
+                <div class="feature-card glass-panel">
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
+                    <h3>Fluid Animations</h3>
+                    <p>Randomized bezier curves and transition effects when switching workspaces. Every switch feels uniquely satisfying.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-panel">
+        <p>Built with 💜 for the Arch Linux Community | "Opportunity, here I come!"</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Simple scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        document.querySelectorAll('.feature-card').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
