@@ -9,6 +9,25 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+    <!-- Arch Boot Sequence -->
+    <div id="boot-screen">
+        <p class="boot-line white">[    0.000000] Linux version 6.8.0-arch1-1</p>
+        <p class="boot-line white">[    0.000000] Command line: initrd=\initramfs-linux.img root=PARTUUID=1234 rw loglevel=3 quiet</p>
+        <p class="boot-line white">[    0.123412] Mounting root file system...</p>
+        <p class="boot-line white">[    0.412411] Starting Systemd...</p>
+        <p class="boot-line white">[  <span style="color:#a6e3a1">OK</span>  ] Started System Logging Service.</p>
+        <p class="boot-line white">[  <span style="color:#a6e3a1">OK</span>  ] Started Login Service.</p>
+        <p class="boot-line red">[FAILED] Failed to start Wait for Network to be Configured.</p>
+        <p class="boot-line white">[  <span style="color:#a6e3a1">OK</span>  ] Reached target Graphical Interface.</p>
+        <p class="boot-line blue">Loading Keqing Electro Environment...</p>
+        <p class="boot-line blue">Initializing Wayland Compositor...</p>
+        <p class="boot-line white">_</p>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <!-- Background Elements -->
     <div class="bg-glow purple-glow"></div>
     <div class="bg-glow cyan-glow"></div>
@@ -27,7 +46,7 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1 class="fade-in-up">Keqing <span class="gradient-text">Electro</span></h1>
+                <h1 class="fade-in-up glitch-hover">Keqing <span class="gradient-text">Electro</span></h1>
                 <p class="subtitle fade-in-up delay-1">An ultra-premium, deeply customized Hyprland desktop environment for Arch Linux. Engineered with dynamic Pywal sync, fluid Bezier animations, and absolute elegance.</p>
                 <div class="cta-group fade-in-up delay-2">
                     <a href="https://github.com/Arnav1771/Arch_Rice" class="btn-primary" target="_blank">
@@ -62,7 +81,7 @@
         </section>
 
         <section id="features" class="features">
-            <h2 class="section-title">Lightning <span class="gradient-text">Fast</span> Workflow</h2>
+            <h2 class="section-title">Lightning <span class="gradient-text glitch-hover">Fast</span> Workflow</h2>
             <div class="feature-grid">
                 <div class="feature-card glass-panel">
                     <div class="feature-icon"><i data-lucide="sparkles"></i></div>
@@ -83,7 +102,7 @@
         </section>
 
         <section id="showcase" class="features">
-            <h2 class="section-title">The <span class="gradient-text">Archive</span></h2>
+            <h2 class="section-title">The <span class="gradient-text glitch-hover">Archive</span></h2>
             <div class="gallery-grid">
                 <div class="gallery-card glass-panel fade-in-up">
                     <img src="assets/showcase-clean.png" alt="Clean Desktop">
@@ -117,6 +136,47 @@
     <script>
         lucide.createIcons();
         
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+        });
+
+        // Arch Boot Sequence Logic
+        const bootScreen = document.getElementById('boot-screen');
+        const bootLines = document.querySelectorAll('.boot-line');
+        
+        // Disable scrolling during boot
+        document.body.style.overflow = 'hidden';
+        
+        let delay = 300;
+        bootLines.forEach((line, index) => {
+            setTimeout(() => {
+                line.style.opacity = 1;
+            }, delay);
+            // Add a realistic stutters for some lines
+            if (index === 6) delay += 600; // Failed network takes longer
+            else if (index === 9) delay += 800; // Wayland init takes longer
+            else delay += Math.random() * 150 + 50;
+        });
+        
+        // Hide boot screen and restore scroll
+        setTimeout(() => {
+            bootScreen.classList.add('hide');
+            document.body.style.overflow = 'auto';
+            document.body.style.overflowX = 'hidden';
+        }, delay + 600);
+
+        // Scroll Animation Logic
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
