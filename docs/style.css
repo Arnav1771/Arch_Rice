@@ -299,6 +299,41 @@ h1 {
     color: var(--text-muted);
 }
 
+/* Gallery Section */
+.gallery-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.gallery-card {
+    padding: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(202, 158, 230, 0.15);
+}
+
+.gallery-card img {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.gallery-info {
+    padding: 0 1rem 1rem;
+}
+
+.gallery-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--electro-gold);
+}
+
 /* Footer */
 footer {
     text-align: center;
