@@ -12,7 +12,7 @@ wallpaper=$(find "$WALL_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -in
 # Set wallpaper with awww transition
 awww img "$wallpaper" \
     --transition-type grow \
-    --transition-pos cursor \
+    --transition-pos center \
     --transition-duration 1.5
 
 # Generate pywal palette

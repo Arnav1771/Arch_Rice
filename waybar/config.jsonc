@@ -5,7 +5,7 @@
     "margin": "8 12 0 12",
     "spacing": 6,
 
-    "modules-left":   ["hyprland/workspaces", "mpris"],
+    "modules-left":   ["hyprland/workspaces", "mpris", "hyprland/window"],
     "modules-center": ["clock"],
     "modules-right":  ["tray", "network", "bluetooth", "cpu", "temperature", "memory", "backlight", "pulseaudio", "battery", "custom/power"],
 
@@ -45,6 +45,13 @@
             "class<mpv>":               "󰎁",
             "class<keqing-cheatsheet>": "⚡"
         }
+    },
+
+    // ── Active Window ────────────────────────────────────────
+    "hyprland/window": {
+        "format": "<span>{title}</span>",
+        "max-length": 45,
+        "separate-outputs": true
     },
 
     // ── Media Player ─────────────────────────────────────────
@@ -175,5 +182,14 @@
         "format": "⏻",
         "on-click": "~/.config/hypr/scripts/power-menu.sh",
         "tooltip": false
+    },
+
+    // ── Active Ports ─────────────────────────────────────────
+    "custom/ports": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/ports.sh",
+        "interval": 5,
+        "tooltip": true
     }
 }
