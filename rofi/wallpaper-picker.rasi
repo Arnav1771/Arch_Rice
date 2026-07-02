@@ -10,12 +10,9 @@
 
 window {
     transparency:       "real";
-    background-color:   rgba ( 10, 8, 18, 60 % );
-    border:             2px solid;
-    border-color:       @selected-normal-background;
-    border-radius:      20px;
-    width:              860px;
-    padding:            0px;
+    background-color:   rgba ( 5, 4, 10, 80 % ); /* Deep dark transparent */
+    fullscreen:         true;
+    padding:            25% 10%; /* Center the content vertically and horizontally */
     location:           center;
     anchor:             center;
 }
@@ -23,51 +20,53 @@ window {
 mainbox {
     background-color:   transparent;
     children:           [ inputbar, message, listview ];
-    spacing:            0px;
-    padding:            24px;
+    spacing:            20px;
+    padding:            0px;
 }
 
 inputbar {
-    background-color:   rgba ( 0, 0, 0, 35 % );
+    background-color:   rgba ( 255, 255, 255, 5 % );
     border:             1px solid;
     border-color:       @selected-normal-background;
-    border-radius:      14px;
-    padding:            14px 20px;
-    spacing:            12px;
+    border-radius:      20px;
+    padding:            20px 30px;
+    spacing:            15px;
     children:           [ prompt, entry ];
-    margin:             0px 0px 16px 0px;
+    margin:             0px 20% 30px 20%; /* Center the search bar */
 }
 
 prompt {
     background-color:   transparent;
     text-color:         @selected-urgent-background;
-    font:               "JetBrainsMono Nerd Font Bold 15";
+    font:               "JetBrainsMono Nerd Font Bold 18";
 }
 
 entry {
     background-color:   transparent;
     text-color:         @foreground;
-    placeholder:        "Search wallpapers...";
+    placeholder:        "Find your next aesthetic...";
     placeholder-color:  rgba ( 148, 163, 184, 50 % );
+    font:               "JetBrainsMono Nerd Font 18";
 }
 
 message {
     background-color:   transparent;
-    margin:             0px 0px 14px 0px;
+    margin:             0px 0px 20px 0px;
 }
 
 textbox {
-    background-color:   rgba ( 0, 0, 0, 25 % );
+    background-color:   rgba ( 0, 0, 0, 30 % );
     text-color:         @active-background;
-    padding:            10px 16px;
-    border-radius:      10px;
-    font:               "JetBrainsMono Nerd Font 11";
+    padding:            12px 20px;
+    border-radius:      12px;
+    font:               "JetBrainsMono Nerd Font 13";
+    horizontal-align:   0.5;
 }
 
 listview {
     background-color:   transparent;
-    lines:              5;
-    spacing:            16px;
+    lines:              5; /* Show 5 giant thumbnails at once */
+    spacing:            30px;
     scrollbar:          false;
     cycle:              true;
     dynamic:            true;
@@ -75,35 +74,35 @@ listview {
 }
 
 element {
-    background-color:   rgba ( 0, 0, 0, 30 % );
-    border:             1px solid;
-    border-color:       rgba ( 255, 255, 255, 8 % );
-    border-radius:      14px;
-    padding:            14px 10px;
+    background-color:   rgba ( 0, 0, 0, 40 % );
+    border:             2px solid;
+    border-color:       rgba ( 255, 255, 255, 5 % );
+    border-radius:      24px;
+    padding:            20px;
     orientation:        vertical;
 }
 
 element normal.normal {
-    background-color:   rgba ( 0, 0, 0, 30 % );
+    background-color:   rgba ( 0, 0, 0, 40 % );
     text-color:         @foreground;
 }
 
 element alternate.normal {
-    background-color:   rgba ( 0, 0, 0, 25 % );
+    background-color:   rgba ( 0, 0, 0, 35 % );
     text-color:         @foreground;
 }
 
 element selected.normal {
-    background-color:   rgba ( 255, 255, 255, 12 % );
-    border:             2px solid;
+    background-color:   rgba ( 255, 255, 255, 10 % );
+    border:             4px solid;
     border-color:       @selected-normal-background;
     text-color:         @foreground;
 }
 
 element-icon {
     background-color:   transparent;
-    size:               150px;
-    border-radius:      10px;
+    size:               280px; /* GIANT thumbnails */
+    border-radius:      16px;
     horizontal-align:   0.5;
 }
 
@@ -112,6 +111,6 @@ element-text {
     text-color:         inherit;
     horizontal-align:   0.5;
     vertical-align:     0.5;
-    padding:            10px 0px 0px 0px;
-    font:               "JetBrainsMono Nerd Font 10";
+    padding:            20px 0px 0px 0px;
+    font:               "JetBrainsMono Nerd Font Bold 12";
 }
