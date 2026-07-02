@@ -1,8 +1,26 @@
 #!/bin/bash
 WALL_DIR="$HOME/.config/hypr/wallpapers/"
+ROFI_THEME="$HOME/.config/rofi/wallpaper-picker.rasi"
 
-# This picks Keqing1.jpg and generates the purple/gold palette
-selected_wall=$(ls "$WALL_DIR" | rofi -dmenu -p "󰉼 Electro-System")
+# Build Rofi entries with image thumbnail previews
+# Format: "filename\0icon\x1f/full/path" → Rofi renders the image as an icon
+entries=""
+count=0
+for img in "$WALL_DIR"*.{jpg,jpeg,png,webp} ; do
+    [ -f "$img" ] || continue
+    name=$(basename "$img")
+    entries+="${name}\0icon\x1f${img}\n"
+    ((count++))
+done
+
+# Launch the epic glassmorphic wallpaper picker
+selected_wall=$(echo -en "$entries" | rofi -dmenu \
+    -i \
+    -show-icons \
+    -theme "$ROFI_THEME" \
+    -p "󰉼  Electro" \
+    -mesg "  ${count} wallpapers available" \
+    -selected-row 0)
 
 if [ -n "$selected_wall" ]; then
     awww img "$WALL_DIR/$selected_wall" --transition-type grow
