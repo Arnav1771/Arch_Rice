@@ -66,15 +66,12 @@ textbox {
 
 listview {
     background-color:   transparent;
-    columns:            4;
-    lines:              3;
-    fixed-columns:      true;
-    fixed-height:       true;
-    spacing:            14px;
+    lines:              5;
+    spacing:            16px;
     scrollbar:          false;
     cycle:              true;
     dynamic:            true;
-    layout:             vertical;
+    layout:             horizontal;
 }
 
 element {
