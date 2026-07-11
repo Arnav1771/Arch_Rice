@@ -12,7 +12,7 @@ window {
     transparency:       "real";
     background-color:   rgba ( 5, 4, 10, 80 % ); /* Deep dark transparent */
     fullscreen:         true;
-    padding:            25% 10%; /* Center the content vertically and horizontally */
+    padding:            25% 5%; /* Center the content vertically and horizontally */
     location:           center;
     anchor:             center;
 }
@@ -65,12 +65,12 @@ textbox {
 
 listview {
     background-color:   transparent;
-    lines:              5; /* Show 5 giant thumbnails at once */
+    columns:            4;
+    lines:              1;
     spacing:            30px;
     scrollbar:          false;
     cycle:              true;
     dynamic:            true;
-    layout:             horizontal;
 }
 
 element {
