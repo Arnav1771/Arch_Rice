@@ -257,3 +257,18 @@ window#waybar {
     border-color: rgba(249, 226, 175, 0.5);
     box-shadow: 0 0 12px rgba(249, 226, 175, 0.4);
 }
+
+/* ── Keqing Dashboard Highlight ─────────────────────────── */
+#custom-dashboard {
+    color: #11111b;
+    background: #f9e2af;
+    padding: 0 14px;
+    border-radius: 10px;
+    margin: 4px 6px;
+    box-shadow: 0 0 10px rgba(249, 226, 175, 0.6);
+    font-size: 16px;
+}
+#custom-dashboard:hover {
+    background: #ca9ee6;
+    box-shadow: 0 0 15px rgba(202, 158, 230, 0.8);
+}

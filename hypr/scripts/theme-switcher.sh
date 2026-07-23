@@ -13,14 +13,17 @@ for img in "$WALL_DIR"*.{jpg,jpeg,png,webp,gif,mp4,webm} ; do
     ((count++))
 done
 
-# Launch the epic glassmorphic wallpaper picker
-selected_wall=$(echo -en "$entries" | rofi -dmenu \
-    -i \
-    -show-icons \
-    -theme "$ROFI_THEME" \
-    -p "󰉼  Electro" \
-    -mesg "  ${count} wallpapers available" \
-    -selected-row 0)
+if [ -n "$1" ]; then
+    selected_wall=$(basename "$1")
+else
+    selected_wall=$(echo -en "$entries" | rofi -dmenu \
+        -i \
+        -show-icons \
+        -theme "$ROFI_THEME" \
+        -p "󰉼  Electro" \
+        -mesg "  ${count} wallpapers available" \
+        -selected-row 0)
+fi
 
 if [ -n "$selected_wall" ]; then
     ext="${selected_wall##*.}"
