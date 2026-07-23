@@ -36,7 +36,7 @@ if [ -n "$selected_wall" ]; then
             ffmpeg -y -i "$WALL_DIR/$selected_wall" -vframes 1 /tmp/wall_frame.jpg >/dev/null 2>&1
             wal -i "/tmp/wall_frame.jpg" -n
         else
-            notify-send "Video Wallpaper" "Please install mpvpaper (sudo pacman -S mpvpaper) to play video wallpapers."
+            notify-send "Video Wallpaper" "Please install mpvpaper (yay -S mpvpaper) to play video wallpapers."
             exit 1
         fi
     else
