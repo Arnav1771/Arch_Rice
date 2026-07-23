@@ -5,11 +5,24 @@ ROFI_THEME="$HOME/.config/rofi/wallpaper-picker.rasi"
 # Build Rofi entries with image thumbnail previews
 # Format: "filename\0icon\x1f/full/path" → Rofi renders the image as an icon
 entries=""
-count=0
+THUMB_DIR="$HOME/.cache/hypr_thumbs"
+mkdir -p "$THUMB_DIR"
+
 for img in "$WALL_DIR"*.{jpg,jpeg,png,webp,gif,mp4,webm} ; do
     [ -f "$img" ] || continue
     name=$(basename "$img")
-    entries+="${name}\0icon\x1f${img}\n"
+    thumb="$THUMB_DIR/${name}.jpg"
+    
+    # Generate a lightweight thumbnail if it doesn't exist
+    if [ ! -f "$thumb" ]; then
+        if [[ "$img" == *.mp4 || "$img" == *.webm ]]; then
+            ffmpeg -y -ss 00:00:01 -i "$img" -vframes 1 -vf scale=200:-1 "$thumb" >/dev/null 2>&1
+        else
+            ffmpeg -y -i "$img" -vframes 1 -vf scale=200:-1 "$thumb" >/dev/null 2>&1
+        fi
+    fi
+    
+    entries+="${name}\0icon\x1f${thumb}\n"
     ((count++))
 done
 
