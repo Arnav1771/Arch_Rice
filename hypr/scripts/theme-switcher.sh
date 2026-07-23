@@ -6,7 +6,7 @@ ROFI_THEME="$HOME/.config/rofi/wallpaper-picker.rasi"
 # Format: "filename\0icon\x1f/full/path" → Rofi renders the image as an icon
 entries=""
 count=0
-for img in "$WALL_DIR"*.{jpg,jpeg,png,webp} ; do
+for img in "$WALL_DIR"*.{jpg,jpeg,png,webp,gif,mp4,webm} ; do
     [ -f "$img" ] || continue
     name=$(basename "$img")
     entries+="${name}\0icon\x1f${img}\n"
@@ -23,8 +23,29 @@ selected_wall=$(echo -en "$entries" | rofi -dmenu \
     -selected-row 0)
 
 if [ -n "$selected_wall" ]; then
-    awww img "$WALL_DIR/$selected_wall" --transition-type grow
-    wal -i "$WALL_DIR/$selected_wall" -n
+    ext="${selected_wall##*.}"
+    ext=$(echo "$ext" | tr '[:upper:]' '[:lower:]')
+    
+    if [ "$ext" = "mp4" ] || [ "$ext" = "webm" ]; then
+        if command -v mpvpaper >/dev/null; then
+            killall awww-daemon
+            killall mpvpaper
+            mpvpaper -o "loop no-audio" "*" "$WALL_DIR/$selected_wall" &
+            
+            # Generate temporary image frame for pywal
+            ffmpeg -y -i "$WALL_DIR/$selected_wall" -vframes 1 /tmp/wall_frame.jpg >/dev/null 2>&1
+            wal -i "/tmp/wall_frame.jpg" -n
+        else
+            notify-send "Video Wallpaper" "Please install mpvpaper (sudo pacman -S mpvpaper) to play video wallpapers."
+            exit 1
+        fi
+    else
+        killall mpvpaper
+        pgrep awww-daemon >/dev/null || awww-daemon &
+        awww img "$WALL_DIR/$selected_wall" --transition-type grow
+        wal -i "$WALL_DIR/$selected_wall" -n
+    fi
+
     bash ~/.config/yazi/generate-yazi-theme.sh
 
     # ⚡ Live-sync Hyprland border colors from fresh pywal palette
