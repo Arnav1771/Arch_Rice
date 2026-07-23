@@ -1,0 +1,97 @@
+/* ⚡ Keqing Electro — Clipboard Picker Theme */
+
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+
+* {
+    font:               "JetBrainsMono Nerd Font 12";
+    background-color:   transparent;
+    text-color:         @foreground;
+}
+
+window {
+    width:              600px;
+    height:             500px;
+    transparency:       "real";
+    background-color:   rgba ( 15, 15, 20, 85 % ); /* Deep dark translucent */
+    border:             2px solid;
+    border-color:       @selected-normal-background;
+    border-radius:      16px;
+    location:           center;
+    anchor:             center;
+}
+
+mainbox {
+    background-color:   transparent;
+    children:           [ inputbar, listview ];
+    spacing:            15px;
+    padding:            20px;
+}
+
+inputbar {
+    background-color:   rgba ( 255, 255, 255, 5 % );
+    border:             1px solid;
+    border-color:       rgba ( 255, 255, 255, 10 % );
+    border-radius:      12px;
+    padding:            15px;
+    spacing:            15px;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    background-color:   transparent;
+    text-color:         @selected-urgent-background;
+    font:               "JetBrainsMono Nerd Font Bold 14";
+}
+
+entry {
+    background-color:   transparent;
+    text-color:         #ffffff; /* Force white text for visibility */
+    placeholder:        "Search clipboard...";
+    placeholder-color:  rgba ( 255, 255, 255, 30 % );
+    font:               "JetBrainsMono Nerd Font 14";
+}
+
+listview {
+    background-color:   transparent;
+    columns:            1;
+    lines:              8;
+    spacing:            8px;
+    scrollbar:          true;
+    cycle:              true;
+    dynamic:            true;
+}
+
+scrollbar {
+    handle-width:       4px;
+    handle-color:       @selected-normal-background;
+    background-color:   rgba ( 255, 255, 255, 5 % );
+    border-radius:      4px;
+}
+
+element {
+    background-color:   transparent;
+    border-radius:      8px;
+    padding:            12px 15px;
+}
+
+element normal.normal {
+    background-color:   transparent;
+    text-color:         #e2e8f0; /* Crisp light gray */
+}
+
+element alternate.normal {
+    background-color:   rgba ( 255, 255, 255, 2 % );
+    text-color:         #e2e8f0;
+}
+
+element selected.normal {
+    background-color:   @selected-normal-background;
+    text-color:         #000000; /* Dark text on bright accent background */
+    border-radius:      8px;
+}
+
+element-text {
+    background-color:   transparent;
+    text-color:         inherit;
+    vertical-align:     0.5;
+}
