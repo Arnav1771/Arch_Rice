@@ -32,8 +32,8 @@ if [ -n "$selected_wall" ]; then
             killall mpvpaper
             mpvpaper -o "loop no-audio" "*" "$WALL_DIR/$selected_wall" &
             
-            # Generate temporary image frame for pywal
-            ffmpeg -y -i "$WALL_DIR/$selected_wall" -vframes 1 /tmp/wall_frame.jpg >/dev/null 2>&1
+            # Fast seek to 1 second and extract 1 frame instantly for pywal
+            ffmpeg -y -ss 00:00:01 -i "$WALL_DIR/$selected_wall" -vframes 1 /tmp/wall_frame.jpg >/dev/null 2>&1
             wal -i "/tmp/wall_frame.jpg" -n
         else
             notify-send "Video Wallpaper" "Please install mpvpaper (yay -S mpvpaper) to play video wallpapers."
